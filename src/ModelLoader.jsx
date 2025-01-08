@@ -113,7 +113,9 @@ const ModelLoader = () => {
       <Canvas camera={{ position: [0, 0, 3], fov: 40 }} dpr={[1, 2]}>
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 5]} intensity={1} />
-        <OrbitControls ref={controlsRef} />
+        <OrbitControls ref={controlsRef}
+        minPolarAngle={0} 
+        maxPolarAngle={Math.PI / 2} />
         
         {/* ContactShadows adjusted to be below the model */}
         <ContactShadows
