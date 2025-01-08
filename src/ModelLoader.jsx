@@ -112,7 +112,7 @@ const ModelLoader = () => {
 
       <Canvas camera={{ position: [0, 0, 3], fov: 40 }} dpr={[1, 2]}
       
-      className='AppBg'
+      // className='AppBg'
 
       >
         <ambientLight intensity={1} />
