@@ -16,7 +16,7 @@ body,
 
 body {
   font-family: 'Inter', sans-serif;
-  background: #d0d0d0;
+  background: #a3a3a3;
 }
 
 a {
@@ -190,21 +190,38 @@ li {
 /* General Container */
 .model-loader-container {
   width: 100%;
-  height: 100%;
-  background: grey;
-  position: relative;
-  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed #a3a3a3;
+  background-color: #a3a3a3;
+  position: fixed; /* Ensures the container is fixed in place */
+  top: 0;
+  left: 0;
+  z-index: 9999; /* Makes sure it stays on top of other elements */
+  overflow: hidden; /* Prevents scrolling */
+}
+
+.upload-options {
+  text-align: center; /* Center text within the options */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Centers the content within the div */
 }
 
 /* Drag and Drop Message */
 .drag-drop-message {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-size: 18px;
-  pointer-events: none;
+  color: #333;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.file-input {
+  display: block;
+  margin: 0 auto;
 }
 
 .app-container {
@@ -217,7 +234,7 @@ li {
 .AppBg{
 
 
-  background-color: #aaaaaa;
+  background-color: #a3a3a3;
 
 
 }

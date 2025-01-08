@@ -6,10 +6,9 @@ import * as THREE from 'three';
 
 // Loading spinner component
 const LoadingSpinner = () => (
-    <div className="loading-spinner">
+  <div className="loading-spinner">
     <div className="spinner"></div>
   </div>
-  
 );
 
 const ModelViewer = ({ model }) => {
@@ -50,10 +49,7 @@ const ModelLoader = () => {
   const [loading, setLoading] = useState(false); // Track loading state
   const controlsRef = useRef();
 
-  const handleDrop = (event) => {
-    event.preventDefault();
-    const file = event.dataTransfer.files[0];
-
+  const handleFile = (file) => {
     if (file && (file.name.endsWith('.gltf') || file.name.endsWith('.glb'))) {
       const reader = new FileReader();
 
@@ -67,28 +63,23 @@ const ModelLoader = () => {
           setUploadedModel(gltf);
           setLoading(false); // Hide loader after model is loaded
         });
-
-        // You can also use `onProgress` to show the progress if necessary
-        loader.load(
-          '', 
-          (gltf) => {
-            setUploadedModel(gltf);
-            setLoading(false);
-          },
-          (xhr) => {
-            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-          },
-          (error) => {
-            console.error('An error happened while loading the model', error);
-            setLoading(false);
-          }
-        );
       };
 
       reader.readAsArrayBuffer(file);
     } else {
       alert('Please upload a .gltf or .glb file');
     }
+  };
+
+  const handleDrop = (event) => {
+    event.preventDefault();
+    const file = event.dataTransfer.files[0];
+    handleFile(file);
+  };
+
+  const handleFileInputChange = (event) => {
+    const file = event.target.files[0];
+    handleFile(file);
   };
 
   const handleDragOver = (event) => {
@@ -102,39 +93,33 @@ const ModelLoader = () => {
       className="model-loader-container"
     >
       {!uploadedModel && !loading && (
-         <div className="drag-drop-message">
-         Drag and drop a 3D model (.gltf or .glb) here
-       </div>
+        <div className="upload-options">
+          <div className="drag-drop-message">
+            Drag and drop a 3D model (.gltf or .glb) here
+          </div>
+          <input
+            type="file"
+            accept=".gltf,.glb"
+            onChange={handleFileInputChange}
+            className="file-input"
+          />
+        </div>
       )}
 
       {/* Show loading spinner while model is loading */}
       {loading && <LoadingSpinner />}
 
-      <Canvas camera={{ position: [0, 0, 3], fov: 40 }} dpr={[1, 2]}
-      
-      // className='AppBg'
-
-      >
-        <ambientLight intensity={1} />
-        {/* <directionalLight position={[10, 10, 5]} intensity={1} /> */}
-        <OrbitControls ref={controlsRef}
-
-        minDistance={1}
-        
-         />
-        {/* ContactShadows adjusted to be below the model */}
+      <Canvas camera={{ position: [0, 0, 3], fov: 40 }} dpr={[1, 2]} className='AppBg'>
+        <ambientLight intensity={0.2} />
+        <OrbitControls ref={controlsRef} minDistance={1} />
         <ContactShadows
-          position={[0, -0.4, 0]}  // Adjust shadow position to be closer to model base
+          position={[0, -0.4, 0]} // Adjust shadow position to be closer to model base
           opacity={0.5}
           scale={10}
           blur={1.5}
           far={1}
         />
-        
-        <Environment  files= '/Skybox4.exr'
-         background = {false}
-        environmentIntensity={1}
-         />
+        <Environment preset="studio" background={false} />
         <Center>
           <ModelViewer model={uploadedModel} />
         </Center>
