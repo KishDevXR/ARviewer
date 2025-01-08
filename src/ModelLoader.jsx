@@ -124,7 +124,7 @@ const ModelLoader = () => {
           far={1}
         />
         
-        <Environment preset="studio" background blur={1} />
+        <Environment preset="city" background blur={1} />
         <Center>
           <ModelViewer model={uploadedModel} />
         </Center>
