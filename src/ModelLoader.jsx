@@ -111,8 +111,8 @@ const ModelLoader = () => {
       {loading && <LoadingSpinner />}
 
       <Canvas camera={{ position: [0, 0, 3], fov: 40 }} dpr={[1, 2]}>
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 5]} intensity={1} />
+        <ambientLight intensity={1} />
+        {/* <directionalLight position={[10, 10, 5]} intensity={1} /> */}
         <OrbitControls ref={controlsRef}
          />
         {/* ContactShadows adjusted to be below the model */}
@@ -124,7 +124,10 @@ const ModelLoader = () => {
           far={1}
         />
         
-        <Environment preset="city" background blur={1} />
+        <Environment  files= '/Skybox4.exr'
+         background = {false}
+        environmentIntensity={1}
+         />
         <Center>
           <ModelViewer model={uploadedModel} />
         </Center>
