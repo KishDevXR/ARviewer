@@ -114,9 +114,7 @@ const ModelLoader = () => {
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 5]} intensity={1} />
         <OrbitControls ref={controlsRef}
-        minPolarAngle={0} 
-        maxPolarAngle={Math.PI / 2} />
-        
+         />
         {/* ContactShadows adjusted to be below the model */}
         <ContactShadows
           position={[0, -0.4, 0]}  // Adjust shadow position to be closer to model base
