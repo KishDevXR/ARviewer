@@ -110,10 +110,17 @@ const ModelLoader = () => {
       {/* Show loading spinner while model is loading */}
       {loading && <LoadingSpinner />}
 
-      <Canvas camera={{ position: [0, 0, 3], fov: 40 }} dpr={[1, 2]}>
+      <Canvas camera={{ position: [0, 0, 3], fov: 40 }} dpr={[1, 2]}
+      
+      className='AppBg'
+
+      >
         <ambientLight intensity={1} />
         {/* <directionalLight position={[10, 10, 5]} intensity={1} /> */}
         <OrbitControls ref={controlsRef}
+
+        minDistance={1}
+        
          />
         {/* ContactShadows adjusted to be below the model */}
         <ContactShadows
